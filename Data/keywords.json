@@ -1,0 +1,21 @@
+{
+  "airport":{
+    "Boston":"",
+    "pizza":""
+  },
+  "vehicle":{
+    "corolla":"",
+    "civic":""
+  },
+  "toy":{
+    "dog":"",
+    "fish":"",
+    "bird":""
+  },
+  "attribute":{
+    "price":"",
+    "size":"",
+    "color":""
+  }
+
+}

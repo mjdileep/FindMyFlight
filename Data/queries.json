@@ -1,0 +1,59 @@
+{
+  "1":{
+    "GeneralForm":"What are the tickets available less than  from  to on?",
+    "originalQuery": "?max_price=xxx0&origin=xxx1&destination=xxx2&departure_date=xxx3",
+    "replaces":{
+    "xxx0":"price",
+      "xxx1":"airport",
+      "xxx2":"airport",
+      "xxx3":"date"
+     },
+    "properties":{
+      "price":"1",
+      "airport":"2",
+      "date":"1"
+    }
+  },
+  "2":{
+    "GeneralForm":"What will be the price of a ticket from  to  on ?",
+    "originalQuery": "?origin=xxx0&destination=xxx1&departure_date=xxx2",
+    "replaces":{
+    "xxx0":"airport",
+      "xxx1":"airport",
+      "xxx2":"date"
+     },
+    "properties":{
+    "airport":"2",
+      "date":"1"
+    }
+  },
+  "4":{
+    "GeneralForm":"Could you please let me know the available options for a flight to on and return after days",
+    "originalQuery": "origin=Colombo&destination=xxx0&departure_date=xxx1&duration=xxx2",
+    "replaces":{
+    "xxx0":"airport",
+      "xxx1":"date",
+      "xxx2":"day"
+
+     },
+    "properties":{
+    "airport":"1",
+      "date":"1",
+      "day":"1"
+    }
+  },
+  "5":{
+    "GeneralForm":"What are the available flights from  to  on ",
+    "originalQuery": "origin=xxx0&destination=xxx1&departure_date=xxx2",
+    "replaces":{
+    "xxx0":"airport",
+      "xxx1":"airport",
+      "xxx2":"date"
+
+     },
+    "properties":{
+    "airport":"2",
+      "date":"1"
+    }
+  }
+}
