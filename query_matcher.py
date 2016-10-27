@@ -6,7 +6,9 @@ import spacy
 from fuzzywuzzy import fuzz
 class QueryMatcher(object):
     jsonHandler=JsonHandler()
-    nlp=English()
+    nlp=None
+    def __init__(self,nlp):
+        self.nlp=nlp
     def getQuery(self,statement):
         properties=self.getProperties(statement)
         queries=self.searchPropertyMatch(properties)
@@ -16,20 +18,16 @@ class QueryMatcher(object):
     def getProperties(self,statement):
 
         doc=self.nlp(statement)
-        properties={"date":"0","price":"0","airport":"0","day":"0"}
+        properties={"date":"0","price":"0","airport":"0"}
         for each in doc.ents:
             if str(each.label_)=="MONEY":
                 val=int(properties.__getitem__("price"))
                 val+=1
                 properties.__setitem__("price",str(val))
-            elif str(each.label_)=="TIME" or str(each.label_)=="DATE":
+            elif str(each.label_)=="TIME" or str(each.label_)=="DATE" or str(each.label_)=="CARDINAL":
                 val=int(properties.__getitem__("date"))
                 val+=1
                 properties.__setitem__("date",str(val))
-            elif str(each.label_)=="CARDINAL":
-                val=int(properties.__getitem__("day"))
-                val+=1
-                properties.__setitem__("day",str(val))
             elif str(each.label_)=="GPE":
                 val=int(properties.__getitem__("airport"))
                 val+=1
@@ -46,13 +44,14 @@ class QueryMatcher(object):
         maxScore=0.0
         maxQueryID=""
         maxReplaces=None
+
         for ID in queries:
             totScore=self.getMaxHit(statement,self.jsonHandler.getGeneralizedQuery(ID))
             replaces=self.jsonHandler.getReplaces(ID)
             numOfReplaces=len(replaces)
             for i in range(0,len(replaces)):
-                replace=replaces[i]
-                score,key=self.getMaximumScoringKey(replace,statement)
+                replace=entityCoordinate(replaces[i],i)
+                score,key=self.getMaximumScoringKey(replace,statement,i)
                 totScore+=score/numOfReplaces
                 replaces[i]=key
             if(maxScore>=totScore):
@@ -78,15 +77,34 @@ class QueryMatcher(object):
              originalQuery=originalQuery.replace("xxx"+str(i),replaces[i])
         return originalQuery
 
-    def getMaximumScoringKey(self,replace,statement):
+    def getMaximumScoringKey(self,replace,statement,i):
 
-        if (replace=="price"):
+        #TODO implement the entity-coordination relationship
+        if (replace.entity=="price"):
             doc=self.nlp(statement)
             for ent in doc.ents:
-                if str(ent.label_)=="MONEY" or str(ent.label_)=="CARDINAL":
+                if str(ent.label_)=="MONEY":
                     return 0,self.get_first_nbr_from_str(str(ent))
+        elif (replace.entity=="date"):
+            doc=self.nlp(statement)
+            for ent in doc.ents:
+                if str(ent.label_)=="DATE" or str(ent.label_)=="TIME" or str(ent.label_)=="CARDINAL":
+                    return 0,str(ent)
+        elif (replace.entity=="airport"):
+            doc=self.nlp(statement)
+            indx=0
+            GPE=None
+            positionScore=100000.0
+            for ent in doc.ents:
+                score=pow(abs(replace.coordinate-indx),2)
+                if str(ent.label_)=="GPE" and score<positionScore:
+                    positionScore=score
+                    GPE=str(ent)
+                indx+=1
+            return 0,GPE
+
         else:
-            categorySet=replace.split(",")
+            categorySet=replace.entity.split(",")
             maxScore=0.0
             maxScoreReplace=""
             for each in categorySet:
@@ -109,3 +127,9 @@ class QueryMatcher(object):
             elif out_number:
                 break
         return out_number
+class entityCoordinate(object):
+    entity=None
+    coordinate=0
+    def __init__(self,entity,coordinate):
+        self.entity=entity
+        self.coordinate=coordinate

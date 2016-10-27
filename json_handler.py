@@ -3,8 +3,8 @@ import copy
 import json
 import os
 class JsonHandler(object):
-    queries=open(os.getcwd()+"/Data/queries")#Path to json files
-    keywords=open(os.getcwd()+"/Data/keywords")
+    queries=open(os.getcwd()+"/Data/queries.json")#Path to json files
+    keywords=open(os.getcwd()+"/Data/keywords.json")
     keywords=json.load(keywords)
     queries=json.load(queries)
     def matchProperties(self,properties):#properties is a json file
