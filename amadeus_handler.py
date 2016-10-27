@@ -11,12 +11,16 @@ class amadeusAdapter(object):
             origins=None
             destinations=None
             if param.get("origin")!=None:
-                origins=self.autoComplete(param.get("origin"))
+                if param.get("origin")=="CMB":
+                    origins=[{'label': 'Colombo - Bandaranayake International Air Port [CMB]', 'value': 'CMB'}]
+                else:
+                    origins=self.autoComplete(param.get("origin"))
             if param.get("destination")!=None:
                 destinations=self.autoComplete((param.get("destination")))
-            if len(origins)==0:
+            if len(origins)==0 :
                 return None
             if destinations==None or len(destinations)==0:
+                param.__delitem__("destination")
                 for i in range(len(origins)):
                     param.__setitem__("origin",origins[i].get("value"))
                     resultsSet.append(self.inspiration_search(param))
@@ -34,7 +38,10 @@ class amadeusAdapter(object):
             origins=None
             destinations=None
             if param.get("origin")!=None:
-                origins=self.autoComplete(param.get("origin"))
+                if param.get("origin")=="CMB":
+                    origins=[{'label': 'Colombo - Bandaranayake International Air Port [CMB]', 'value': 'CMB'}]
+                else:
+                    origins=self.autoComplete(param.get("origin"))
             if param.get("destination")!=None:
                 destinations=self.autoComplete((param.get("destination")))
             if len(origins)==0 or len(destinations)==0:
@@ -51,7 +58,10 @@ class amadeusAdapter(object):
             origins=None
             destinations=None
             if param.get("origin")!=None:
-                origins=self.autoComplete(param.get("origin"))
+                if param.get("origin")=="CMB":
+                    origins=[{'label': 'Colombo - Bandaranayake International Air Port [CMB]', 'value': 'CMB'}]
+                else:
+                    origins=self.autoComplete(param.get("origin"))
             if param.get("destination")!=None:
                 destinations=self.autoComplete((param.get("destination")))
             if len(origins)==0 or len(destinations)==0:

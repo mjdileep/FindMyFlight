@@ -9,6 +9,6 @@ nlp=English()
 var =QueryMatcher(nlp)
 import requests
 
-stmnt="What are the minimum price tickets from Colombo to India on 12-12-2016 ?"
+stmnt="Want to go from Boston to Denmark?"
 results=var.getResults(stmnt)
 print(results)

@@ -1,6 +1,6 @@
 {
   "1":{
-    "GeneralForm":"What are the minimum price tickets from to on ?",
+    "GeneralForm":"What are the minimum price tickets from to on ?,What are the budget tickets from to on ?,What are cheapest tickets available from to on ?,",
     "originalQuery": "?origin=xxx0&destination=xxx1&departure_date=xxx2",
     "replaces":{
       "xxx0":"airport",
@@ -15,55 +15,140 @@
     },
     "properties":{
       "date":"1",
-      "airport":"2"
+      "airport":"2",
+      "price":"0"
     }
   },
   "2":{
-    "GeneralForm":"What will be the price of a ticket from  to  on ?",
-    "originalQuery": "?origin=xxx0&destination=xxx1&departure_date=xxx2",
+    "GeneralForm":"Where can I go less than ?,Places I can go less than,Places I can visit less than",
+    "originalQuery": "?origin=CMB&max_price=xxx0",
     "replaces":{
-    "xxx0":"airport",
+      "xxx0":"price"
+     },
+    "search":"inspiration_search",
+    "attributes":{
+      "xxx0":"max_price",
+      "origin":"CMB"
+    },
+    "properties":{
+    "airport":"0",
+      "date":"0",
+      "price":"1"
+    }
+  },
+  "3":{
+    "GeneralForm":"Where can I go less than from?,Places I can go less than from,Places I can visit less than from",
+    "originalQuery": "?max_price=xxx0&origin=xxx1",
+    "replaces":{
+      "xxx0":"price",
+      "xxx1":"airport"
+     },
+    "search":"inspiration_search",
+    "attributes":{
+      "xxx0":"max_price",
+      "xxx1":"origin"
+    },
+    "properties":{
+    "airport":"1",
+      "price":"1",
+      "date":"0"
+    }
+  },
+   "4":{
+    "GeneralForm":"Where can I go from less than ?,Places I can go from less than,Places I can visit from less than",
+    "originalQuery": "?origin=xxx0&max_price=xxx1",
+    "replaces":{
+      "xxx0":"airport",
+      "xxx1":"price"
+     },
+    "search":"inspiration_search",
+    "attributes":{
+      "xxx0":"origin",
+      "xxx1":"max_price"
+    },
+    "properties":{
+    "airport":"1",
+      "price":"1",
+      "date":"0"
+    }
+  },
+ "5":{
+    "GeneralForm":"Where can I go less than from on?,Places I can go less than from on,Places I can visit less than from on,",
+    "originalQuery": "?max_price=xxx0&origin=xxx1&departure_date=xxx2",
+    "replaces":{
+      "xxx0":"price",
       "xxx1":"airport",
       "xxx2":"date"
      },
+    "search":"inspiration_search",
     "attributes":{
-      "origin":"xxx0",
-      "destination":"xxx1",
-      "departure":"xxx2"
+      "xxx0":"max_price",
+      "xxx1":"origin",
+      "xxx2":"departure_date"
+    },
+    "properties":{
+    "airport":"1",
+      "price":"1",
+      "date":"1"
+    }
+  },
+  "6":{
+    "GeneralForm":"Where can I go from less than on?,Places I can go from less than on,Places I can visit from less than on,",
+    "originalQuery": "?max_price=xxx1&origin=xxx0&departure_date=xxx2",
+    "replaces":{
+      "xxx0":"airport",
+      "xxx1":"price",
+      "xxx2":"date"
+     },
+    "search":"inspiration_search",
+    "attributes":{
+      "xxx0":"origin",
+      "xxx1":"max_price",
+      "xxx2":"departure_date"
+    },
+    "properties":{
+    "airport":"1",
+      "price":"1",
+      "date":"1"
+    }
+  }
+  ,
+  "7":{
+    "GeneralForm":"Where can I go from on less than?,Places I can go from on less than ,Places I can visit from on less than,",
+    "originalQuery": "?max_price=xxx2&origin=xxx0&departure_date=xxx1",
+    "replaces":{
+      "xxx2":"price",
+      "xxx0":"airport",
+      "xxx1":"date"
+     },
+    "search":"inspiration_search",
+    "attributes":{
+      "xxx2":"max_price",
+      "xxx0":"origin",
+      "xxx1":"departure_date"
+    },
+    "properties":{
+    "airport":"1",
+      "price":"1",
+      "date":"1"
+    }
+  },
+  "8":{
+    "GeneralForm":"Want to go from to ,Want to buy a ticket from to ,",
+    "originalQuery": "?origin=xxx0&destination=xxx1",
+    "replaces":{
+      "xxx0":"airport",
+      "xxx1":"airport"
+     },
+    "search":"inspiration_search",
+    "attributes":{
+      "xxx0":"origin",
+      "xxx1":"destination"
     },
     "properties":{
     "airport":"2",
-      "date":"1",
-      "price":"0"
-    }
-  },
-  "4":{
-    "GeneralForm":"Could you please let me know the available options for a flight to on ",
-    "originalQuery": "?origin=WRZ&destination=xxx0&departure_date=xxx1",
-    "replaces":{
-    "xxx0":"airport",
-      "xxx1":"date"
-
-     },
-    "properties":{
-    "airport":"1",
-      "date":"1",
-      "price":"0"
-    }
-  },
-  "5":{
-    "GeneralForm":"What are the available flights from  to  on ",
-    "originalQuery": "?origin=xxx0&destination=xxx1&departure_date=xxx2",
-    "replaces":{
-    "xxx0":"airport",
-      "xxx1":"airport",
-      "xxx2":"date"
-
-     },
-    "properties":{
-    "airport":"2",
-      "date":"1",
-      "price":"0"
+      "price":"0",
+      "date":"0"
     }
   }
 }
