@@ -1,17 +1,21 @@
 {
   "1":{
-    "GeneralForm":"What are the tickets available less than  from  to on?",
-    "originalQuery": "?max_price=xxx0&origin=xxx1&destination=xxx2&departure_date=xxx3",
+    "GeneralForm":"What are the minimum price tickets from to on ?",
+    "originalQuery": "?origin=xxx0&destination=xxx1&departure_date=xxx2",
     "replaces":{
-    "xxx0":"price",
+      "xxx0":"airport",
       "xxx1":"airport",
-      "xxx2":"airport",
-      "xxx3":"date"
+      "xxx2":"date"
      },
+    "search":"low_fare_search",
+    "attributes":{
+      "xxx0":"origin",
+      "xxx1":"destination",
+      "xxx2":"departure_date"
+    },
     "properties":{
-      "price":"1",
-      "airport":"2",
-      "date":"1"
+      "date":"1",
+      "airport":"2"
     }
   },
   "2":{
@@ -22,6 +26,11 @@
       "xxx1":"airport",
       "xxx2":"date"
      },
+    "attributes":{
+      "origin":"xxx0",
+      "destination":"xxx1",
+      "departure":"xxx2"
+    },
     "properties":{
     "airport":"2",
       "date":"1",
@@ -30,7 +39,7 @@
   },
   "4":{
     "GeneralForm":"Could you please let me know the available options for a flight to on ",
-    "originalQuery": "?origin=Colombo&destination=xxx0&departure_date=xxx1",
+    "originalQuery": "?origin=WRZ&destination=xxx0&departure_date=xxx1",
     "replaces":{
     "xxx0":"airport",
       "xxx1":"date"

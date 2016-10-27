@@ -7,28 +7,8 @@ from FindMyFlight.query_matcher import QueryMatcher
 from spacy.en import English
 nlp=English()
 var =QueryMatcher(nlp)
+import requests
 
-stmnt="Want to go to New York on 12-11-2016 "
-query,score=var.getQuery(stmnt)
-print("user query: ",stmnt)
-print("mysql query: ",query)
-print("score: "+str(score))
-
-stmnt="What is the cheapest flight available to fly to India on 16-12-2016 ? "
-query,score=var.getQuery(stmnt)
-print("user query: ",stmnt)
-print("mysql query: ",query)
-print("score: "+str(score))
-
-stmnt="What are the tickers available for less than $500 from Boston to Colombo on 11-03-2016 ? "
-query,score=var.getQuery(stmnt)
-print("user query: ",stmnt)
-print("mysql query: ",query)
-print("score: "+str(score))
-
-stmnt="is there any flights on 12-11-2016 to Japan? "
-query,score=var.getQuery(stmnt)
-print("user query: ",stmnt)
-print("mysql query: ",query)
-print("score: "+str(score))
-import nltk
+stmnt="What are the minimum price tickets from Colombo to India on 12-12-2016 ?"
+results=var.getResults(stmnt)
+print(results)

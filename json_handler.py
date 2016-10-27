@@ -29,8 +29,14 @@ class JsonHandler(object):
     def getOriginalQuery(self,ID):
         if(ID!=""):
             return self.queries.get(ID).get("originalQuery")
+    def getAttributes(self,ID):
+        if(ID!=""):
+            return self.queries.get(ID).get("attributes")
     def getKeywordList(self,key):
         return self.keywords.get(key).keys()
+    def getSearchID(self,ID):
+         if(ID!=""):
+            return self.queries.get(ID).get("search")
     def addQueries(self,query):
         size=int(self.queries.get("size"))
         size+=1

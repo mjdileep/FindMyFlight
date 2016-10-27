@@ -1,19 +1,26 @@
 __author__ = 'ASUS-PC'
-from json_handler import JsonHandler
+from FindMyFlight.json_handler import JsonHandler
 from spacy.en import English
-import copy
+import copy,os
 import spacy
+import json
+from datetime import datetime
 from fuzzywuzzy import fuzz
+from FindMyFlight.amadeus_handler import amadeusAdapter
 class QueryMatcher(object):
     jsonHandler=JsonHandler()
+    amd=amadeusAdapter("s9lQ77z7OKA0yGtJmjL1QmMPJr3a2y60")
     nlp=None
+    with open(os.getcwd()+"/Data/IATA.json", 'r') as fp:
+        iata = json.load(fp)
     def __init__(self,nlp):
         self.nlp=nlp
-    def getQuery(self,statement):
+    def getResults(self,statement):
         properties=self.getProperties(statement)
         queries=self.searchPropertyMatch(properties)
         maxQueryID,maxReplaces,maxScore=self.getBestQueryProperties(queries,statement)
-        return self.buildOriginalQuery(maxQueryID,maxReplaces),maxScore
+        query,attributes,search=self.buildOriginalQuery(maxQueryID,maxReplaces)
+        return self.amd.search(search,attributes)
 
     def getProperties(self,statement):
 
@@ -24,7 +31,7 @@ class QueryMatcher(object):
                 val=int(properties.__getitem__("price"))
                 val+=1
                 properties.__setitem__("price",str(val))
-            elif str(each.label_)=="TIME" or str(each.label_)=="DATE" or str(each.label_)=="CARDINAL":
+            elif str(each.label_)=="TIME" or str(each.label_)=="DATE" or str(each.label_)=="CARDINAL"or str(each.label_)=="QUANTITY" :
                 val=int(properties.__getitem__("date"))
                 val+=1
                 properties.__setitem__("date",str(val))
@@ -73,9 +80,16 @@ class QueryMatcher(object):
         if ID=="":
             return
         originalQuery=self.jsonHandler.getOriginalQuery(ID)
+        attributes=self.jsonHandler.getAttributes(ID)
+        search=self.jsonHandler.getSearchID(ID)
         for i in range(0,len(replaces)):
-             originalQuery=originalQuery.replace("xxx"+str(i),replaces[i])
-        return originalQuery
+            originalQuery=originalQuery.replace("xxx"+str(i),replaces[i])
+            temp=attributes["xxx"+str(i)]
+            attributes.__delitem__("xxx"+str(i))
+            attributes.__setitem__(temp,replaces[i])
+
+
+        return originalQuery,attributes,search
 
     def getMaximumScoringKey(self,replace,statement,i):
 
@@ -88,8 +102,13 @@ class QueryMatcher(object):
         elif (replace.entity=="date"):
             doc=self.nlp(statement)
             for ent in doc.ents:
-                if str(ent.label_)=="DATE" or str(ent.label_)=="TIME" or str(ent.label_)=="CARDINAL":
-                    return 0,str(ent)
+                if str(ent.label_)=="DATE" or str(ent.label_)=="TIME" or str(ent.label_)=="CARDINAL" or str(ent.label_)=="QUANTITY" :
+                    time=str(ent)
+                    try:
+                        time=datetime.strptime(time, "%d-%m-%Y").strftime('%Y-%m-%d')
+                    except:
+                        return 0,str(ent)
+                    return 0,time
         elif (replace.entity=="airport"):
             doc=self.nlp(statement)
             indx=0
