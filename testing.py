@@ -28,9 +28,9 @@ def insertQueue(element):
 while 1:
     temp = input("Enter the query:")
     results=var.getResults(temp)
-    if results !=None or results!="Error While Entity Parsing":
+    if results !=None and results!="Error While Entity Parsing":
         for each in results:
-            if each!=None and each.__len__()==2:
+            if each!=None and each.get("status")!=400:
                 for el in each.get("results"):
                     insertQueue(el)
         for each in range(len(minFareList)):

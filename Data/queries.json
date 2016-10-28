@@ -226,7 +226,7 @@
     },
     "properties":{
       "date":"2",
-      "airport":"1",
+      "airport":"2",
       "price":"0"
     }
    },
@@ -249,6 +249,27 @@
     "properties":{
       "date":"2",
       "airport":"2",
+      "price":"0"
+    }
+   },
+  "15":{
+    "GeneralForm":"Want to go to on and return on?,What are the budget tickets to go to on and return on ?,What are cheapest tickets available to go to on and return back on ?,Available tickets to go to on and return back on ",
+    "originalQuery": "?origin=CMB&destination=xxx0&departure_date=xxx1&return_date=xxx2",
+    "replaces":{
+      "xxx0":"airport",
+      "xxx1":"date",
+      "xxx2":"date"
+     },
+    "search":"low_fare_search",
+    "attributes":{
+      "origin":"CMB",
+      "xxx0":"destination",
+      "xxx1":"departure_date",
+      "xxx2":"return_date"
+    },
+    "properties":{
+      "date":"2",
+      "airport":"1",
       "price":"0"
     }
    }
