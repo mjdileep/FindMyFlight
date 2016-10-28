@@ -84,7 +84,7 @@ class QueryMatcher(object):
         search=self.jsonHandler.getSearchID(ID)
         for i in range(0,len(replaces)):
             originalQuery=originalQuery.replace("xxx"+str(i),replaces[i])
-            temp=attributes["xxx"+str(i)]
+            temp=attributes.get("xxx"+str(i))
             attributes.__delitem__("xxx"+str(i))
             attributes.__setitem__(temp,replaces[i])
 
@@ -101,14 +101,21 @@ class QueryMatcher(object):
                     return 0,self.get_first_nbr_from_str(str(ent))
         elif (replace.entity=="date"):
             doc=self.nlp(statement)
+            TIME=None
+            indx=0
+            positionScore=100000.0
             for ent in doc.ents:
+                score=pow(replace.coordinate-indx,2)
                 if str(ent.label_)=="DATE" or str(ent.label_)=="TIME" or str(ent.label_)=="CARDINAL" or str(ent.label_)=="QUANTITY" :
                     time=str(ent)
                     try:
                         time=datetime.strptime(time, "%d-%m-%Y").strftime('%Y-%m-%d')
+                        if score<positionScore:
+                            positionScore=score
+                            TIME=time
                     except:
-                        return 0,str(ent)
-                    return 0,time
+                        return 0,None
+                    return 0,TIME
         elif (replace.entity=="airport"):
             doc=self.nlp(statement)
             indx=0

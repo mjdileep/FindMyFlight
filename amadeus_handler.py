@@ -20,7 +20,10 @@ class amadeusAdapter(object):
             if len(origins)==0 :
                 return None
             if destinations==None or len(destinations)==0:
-                param.__delitem__("destination")
+                try:
+                    param.__delitem__("destination")
+                except:
+                    pass
                 for i in range(len(origins)):
                     param.__setitem__("origin",origins[i].get("value"))
                     resultsSet.append(self.inspiration_search(param))

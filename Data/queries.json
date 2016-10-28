@@ -151,4 +151,24 @@
       "date":"0"
     }
   }
+  ,
+  "9":{
+    "GeneralForm":"Want to go from to ,Want to buy a ticket from to ,",
+    "originalQuery": "?origin=xxx0&destination=xxx1",
+    "replaces":{
+      "xxx0":"airport",
+      "xxx1":"airport"
+     },
+    "search":"inspiration_search",
+    "attributes":{
+      "xxx0":"origin",
+      "xxx1":"destination"
+    },
+    "properties":{
+    "airport":"2",
+      "price":"0",
+      "date":"0"
+    }
+  }
+
 }

@@ -23,20 +23,20 @@ class JsonHandler(object):
         replaces=[]
         for each in sorted(self.queries.get(ID).get("replaces")):
             replaces.append(self.queries.get(ID).get("replaces").get(each))
-        return copy.copy(replaces)
+        return copy.deepcopy(replaces)
     def getGeneralizedQuery(self,ID):
-        return self.queries.get(ID).get("GeneralForm")
+        return copy.deepcopy(self.queries.get(ID).get("GeneralForm"))
     def getOriginalQuery(self,ID):
         if(ID!=""):
-            return self.queries.get(ID).get("originalQuery")
+            return copy.deepcopy(self.queries.get(ID).get("originalQuery"))
     def getAttributes(self,ID):
         if(ID!=""):
-            return self.queries.get(ID).get("attributes")
+            return copy.deepcopy(self.queries.get(ID).get("attributes"))
     def getKeywordList(self,key):
-        return self.keywords.get(key).keys()
+        return copy.deepcopy(self.keywords.get(key).keys())
     def getSearchID(self,ID):
          if(ID!=""):
-            return self.queries.get(ID).get("search")
+            return copy.deepcopy(self.queries.get(ID).get("search"))
     def addQueries(self,query):
         size=int(self.queries.get("size"))
         size+=1

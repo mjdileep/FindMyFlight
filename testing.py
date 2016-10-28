@@ -1,5 +1,4 @@
 __author__ = 'ASUS-PC'
-
 from FindMyFlight.query_matcher import QueryMatcher
 #this will generate the mysql query according to the user queries
 #knowledge be added in the Data file
@@ -7,8 +6,6 @@ from FindMyFlight.query_matcher import QueryMatcher
 from spacy.en import English
 nlp=English()
 var =QueryMatcher(nlp)
-import requests
-
-stmnt="Want to go from Boston to Denmark?"
-results=var.getResults(stmnt)
-print(results)
+while 1:
+    temp = input("Enter the query:")
+    print(var.getResults(temp))
