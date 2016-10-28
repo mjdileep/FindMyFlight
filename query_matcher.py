@@ -18,9 +18,14 @@ class QueryMatcher(object):
     def getResults(self,statement):
         properties=self.getProperties(statement)
         queries=self.searchPropertyMatch(properties)
+        if len(queries)==0:
+            return None
         maxQueryID,maxReplaces,maxScore=self.getBestQueryProperties(queries,statement)
         query,attributes,search=self.buildOriginalQuery(maxQueryID,maxReplaces)
-        return self.amd.search(search,attributes)
+        if search!="Error While Entity Parsing":
+            return self.amd.search(search,attributes)
+        else:
+            return search
 
     def getProperties(self,statement):
 
@@ -83,10 +88,13 @@ class QueryMatcher(object):
         attributes=self.jsonHandler.getAttributes(ID)
         search=self.jsonHandler.getSearchID(ID)
         for i in range(0,len(replaces)):
-            originalQuery=originalQuery.replace("xxx"+str(i),replaces[i])
-            temp=attributes.get("xxx"+str(i))
-            attributes.__delitem__("xxx"+str(i))
-            attributes.__setitem__(temp,replaces[i])
+            if replaces[i]!=None:
+                originalQuery=originalQuery.replace("xxx"+str(i),replaces[i])
+                temp=attributes.get("xxx"+str(i))
+                attributes.__delitem__("xxx"+str(i))
+                attributes.__setitem__(temp,replaces[i])
+            else:
+                return originalQuery,attributes,"Error While Entity Parsing"
 
 
         return originalQuery,attributes,search

@@ -19,6 +19,44 @@
       "price":"0"
     }
   },
+  "10":{
+    "GeneralForm":"Tickets to on  ?,buy a ticket to on, available tickets to on?,",
+    "originalQuery": "?origin=CMB&destination=xxx0&departure_date=xxx1",
+    "replaces":{
+      "xxx0":"airport",
+      "xxx1":"date"
+     },
+    "search":"low_fare_search",
+    "attributes":{
+      "origin":"CMB",
+      "xxx0":"destination",
+      "xxx1":"departure_date"
+    },
+    "properties":{
+      "date":"1",
+      "airport":"1",
+      "price":"0"
+    }
+  },
+   "11":{
+    "GeneralForm":"Tickets on to ?,buy a ticket on to, available tickets on to ?,",
+    "originalQuery": "?origin=CMB&destination=xxx1&departure_date=xxx0",
+    "replaces":{
+      "xxx1":"airport",
+      "xxx0":"date"
+     },
+    "search":"low_fare_search",
+    "attributes":{
+      "origin":"CMB",
+      "xxx1":"destination",
+      "xxx0":"departure_date"
+    },
+    "properties":{
+      "date":"1",
+      "airport":"1",
+      "price":"0"
+    }
+  },
   "2":{
     "GeneralForm":"Where can I go less than ?,Places I can go less than,Places I can visit less than",
     "originalQuery": "?origin=CMB&max_price=xxx0",
@@ -92,6 +130,7 @@
       "date":"1"
     }
   },
+
   "6":{
     "GeneralForm":"Where can I go from less than on?,Places I can go from less than on,Places I can visit from less than on,",
     "originalQuery": "?max_price=xxx1&origin=xxx0&departure_date=xxx2",
@@ -150,25 +189,69 @@
       "price":"0",
       "date":"0"
     }
-  }
-  ,
-  "9":{
-    "GeneralForm":"Want to go from to ,Want to buy a ticket from to ,",
-    "originalQuery": "?origin=xxx0&destination=xxx1",
-    "replaces":{
-      "xxx0":"airport",
-      "xxx1":"airport"
+  },
+   "9": {
+     "GeneralForm": "Where can I go somewhere on?,where can I go on,want to go somewhere on",
+     "originalQuery": "?origin=CMB&departure_date=xxx0",
+     "replaces": {
+       "xxx0": "date"
      },
-    "search":"inspiration_search",
+     "search": "inspiration_search",
+     "attributes": {
+       "xxx0": "departure_date",
+       "origin": "CMB"
+     },
+     "properties": {
+       "airport": "0",
+       "date": "1",
+       "price": "0"
+     }
+   }
+  ,
+     "13":{
+    "GeneralForm":"on I want to go from to and I will be return by?,I will be going on from to and return by?,on i will be going from to what are the cheapest ticket available and I will be return by?,Available tickets on to fly from to and return by",
+    "originalQuery": "?origin=xxx1&destination=xxx2&departure_date=xxx0&return_date=xxx3",
+    "replaces":{
+      "xxx0":"date",
+      "xxx1":"airport",
+      "xxx2":"airport",
+      "xxx3":"date"
+     },
+    "search":"low_fare_search",
     "attributes":{
-      "xxx0":"origin",
-      "xxx1":"destination"
+      "xxx0":"departure_date",
+      "xxx1":"origin",
+      "xxx3":"destination",
+      "xxx2":"return_date"
     },
     "properties":{
-    "airport":"2",
-      "price":"0",
-      "date":"0"
+      "date":"2",
+      "airport":"1",
+      "price":"0"
     }
-  }
+   },
+  "14":{
+    "GeneralForm":"Want to go from to on and return on?,What are the budget tickets to go from to on and return on ?,What are cheapest tickets available to go from to on and return back on ?,Available tickets to go from to on and return back on ",
+    "originalQuery": "?origin=xxx0&destination=xxx1&departure_date=xxx2&return_date=xxx3",
+    "replaces":{
+      "xxx0":"airport",
+      "xxx1":"airport",
+      "xxx2":"date",
+      "xxx3":"date"
+     },
+    "search":"low_fare_search",
+    "attributes":{
+      "xxx0":"origin",
+      "xxx1":"destination",
+      "xxx2":"departure_date",
+      "xxx3":"return_date"
+    },
+    "properties":{
+      "date":"2",
+      "airport":"2",
+      "price":"0"
+    }
+   }
 
 }
+
