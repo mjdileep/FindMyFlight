@@ -13,7 +13,6 @@ class findFlights(object):
         var =QueryMatcher(self.nlp)
         results=var.getResults(statement)
         res=pp.process(results,1)
-        pp.printResults(res)
         return copy.deepcopy(res)
 
 var=findFlights()
