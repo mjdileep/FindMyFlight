@@ -7,6 +7,13 @@ class postProcessor(object):
         pass
     def process(self,results,search,n):
         if search=="inspiration_search":
+            targetFaults={'message': 'No result found.', 'more_info': 'No price result found.', 'status': 400}
+            try:
+                results.remove(targetFaults)
+            except:
+                pass
+            if results==[]:
+                return None
             return results
         minFareList=[]
         for i in range(n):
@@ -16,6 +23,9 @@ class postProcessor(object):
                 if each!=None and each.get("status")!=400:
                     for el in each.get("results"):
                          self.insertQueue(el,minFareList)
+        if minFareList[0]==self.init:
+            return None
+
         return copy.deepcopy(minFareList)
     def insertQueue(self,element,minFareList):
         for i in range(len(minFareList)):

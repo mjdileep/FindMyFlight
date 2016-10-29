@@ -15,14 +15,13 @@ class findFlights(object):
         var =QueryMatcher(self.nlp)
         results,maxScore,search=var.getResults(statement)
         res=pp.process(results,search,1)
-        pp.printResults(res,search)
         return copy.deepcopy(res),maxScore
 import sys
 var=findFlights()
 while 1:
     try:
         inp=input("Enter:")
-        result,accuracy=var.getFlights(inp)
+        print(var.getFlights(inp))
     except:
         print("Unexpected error:", sys.exc_info()[0])
         pass
