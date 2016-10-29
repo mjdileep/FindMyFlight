@@ -1,6 +1,7 @@
 __author__ = 'ASUS-PC'
 import requests
 from amadeus import Flights
+from fuzzywuzzy import fuzz
 flights=Flights("s9lQ77z7OKA0yGtJmjL1QmMPJr3a2y60")
 class amadeusAdapter(object):
     def __init__(self,key):

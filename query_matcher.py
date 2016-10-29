@@ -3,7 +3,7 @@ from FindMyFlight.json_handler import JsonHandler
 from spacy.en import English
 import copy,os
 import spacy
-import json
+import json,numpy
 from datetime import datetime
 from fuzzywuzzy import fuzz
 from FindMyFlight.amadeus_handler import amadeusAdapter
@@ -124,7 +124,7 @@ class QueryMatcher(object):
                     except:
                         pass
                 indx+=1
-            return 0,TIME
+            return (20/(positionScore+1)),TIME
         elif (replace.entity=="airport"):
             doc=self.nlp(statement)
             indx=0
@@ -136,7 +136,7 @@ class QueryMatcher(object):
                     positionScore=score
                     GPE=str(ent)
                 indx+=1
-            return 0,GPE
+            return (20/(positionScore+1)),GPE
 
         else:
             categorySet=replace.entity.split(",")
