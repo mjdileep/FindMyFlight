@@ -19,13 +19,13 @@ class QueryMatcher(object):
         properties=self.getProperties(statement)
         queries=self.searchPropertyMatch(properties)
         if len(queries)==0:
-            return None
+            return None,None
         maxQueryID,maxReplaces,maxScore=self.getBestQueryProperties(queries,statement)
         query,attributes,search=self.buildOriginalQuery(maxQueryID,maxReplaces)
         if search!="Error While Entity Parsing":
-            return self.amd.search(search,attributes)
+            return self.amd.search(search,attributes),maxScore,search
         else:
-            return search
+            return search,maxScore,search
 
     def getProperties(self,statement):
 

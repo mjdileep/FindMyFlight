@@ -5,7 +5,9 @@ class postProcessor(object):
     init={"fare":{"total_price":"1000000.0"}}
     def __init__(self):
         pass
-    def process(self,results,n):
+    def process(self,results,search,n):
+        if search=="inspiration_search":
+            return results
         minFareList=[]
         for i in range(n):
             minFareList.append(self.init)
@@ -27,7 +29,10 @@ class postProcessor(object):
                     minFareList[j-1]=copy.deepcopy(minFareList[j-2])
                 minFareList[i]=copy.deepcopy(element)
                 return
-    def printResults(self,minFareList):
+    def printResults(self,minFareList,search):
+        if search=="inspiration_search":
+            print(minFareList)
+            return
         for each in range(len(minFareList)):
             if minFareList[each]!=self.init:
                 print("Total Fare = " ,minFareList[each].get("fare").get("total_price"))
