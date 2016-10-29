@@ -122,8 +122,9 @@ class QueryMatcher(object):
                             positionScore=score
                             TIME=time
                     except:
-                        return 0,None
-                    return 0,TIME
+                        pass
+                indx+=1
+            return 0,TIME
         elif (replace.entity=="airport"):
             doc=self.nlp(statement)
             indx=0

@@ -221,8 +221,8 @@
     "attributes":{
       "xxx0":"departure_date",
       "xxx1":"origin",
-      "xxx3":"destination",
-      "xxx2":"return_date"
+      "xxx2":"destination",
+      "xxx3":"return_date"
     },
     "properties":{
       "date":"2",
@@ -275,4 +275,5 @@
    }
 
 }
+
 
