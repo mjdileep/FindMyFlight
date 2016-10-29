@@ -3,9 +3,12 @@ import copy
 import pprint
 class postProcessor(object):
     init={"fare":{"total_price":"1000000.0"}}
+
     def __init__(self):
-        pass
+        self.replace="Option "
+
     def process(self,results,search,n):
+
         if search=="inspiration_search":
             targetFaults={'message': 'No result found.', 'more_info': 'No price result found.', 'status': 400}
             try:
@@ -14,30 +17,30 @@ class postProcessor(object):
                 pass
             if results==[]:
                 return None
-            return results
-        minFareList=[]
+            return results[0]
+        minFareList={}
         for i in range(n):
-            minFareList.append(self.init)
+            minFareList.__setitem__(self.replace+str(i+1),self.init)
         if results !=None and results!="Error While Entity Parsing":
             for each in results:
                 if each!=None and each.get("status")!=400:
                     for el in each.get("results"):
                          self.insertQueue(el,minFareList)
-        if minFareList[0]==self.init:
+        if minFareList.get(self.replace+str(1))==self.init:
             return None
 
         return copy.deepcopy(minFareList)
     def insertQueue(self,element,minFareList):
         for i in range(len(minFareList)):
             price=float(element.get("fare").get("total_price"))
-            exist=str(minFareList[i].get("fare").get("total_price"))
+            exist=str(minFareList.get(self.replace+str(i+1)).get("fare").get("total_price"))
             if float(exist)>price:
                 for each in minFareList:
                     if element==each:
                         return
                 for j in range(len(minFareList),i,-1):
-                    minFareList[j-1]=copy.deepcopy(minFareList[j-2])
-                minFareList[i]=copy.deepcopy(element)
+                    minFareList.__setitem__(self.replace+str(j),copy.deepcopy(minFareList.get(self.replace+str(j-1))))
+                minFareList.__setitem__(self.replace+str(i+1),copy.deepcopy(element))
                 return
     def printResults(self,minFareList,search):
         if search=="inspiration_search":
