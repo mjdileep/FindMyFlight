@@ -12,12 +12,15 @@ class amadeusAdapter(object):
             origins=None
             destinations=None
             if param.get("origin")!=None:
-                if param.get("origin")=="CMB":
+                if param.get("origin")=="CMB" or param.get("origin")=="Colombo" or param.get("origin")=="Sri Lanka" :
                     origins=[{'label': 'Colombo - Bandaranayake International Air Port [CMB]', 'value': 'CMB'}]
                 else:
                     origins=self.autoComplete(param.get("origin"))
             if param.get("destination")!=None:
-                destinations=self.autoComplete((param.get("destination")))
+                if  param.get("destination")=="Colombo" or param.get("origin")=="Sri Lanka":
+                    destinations= [{'label': 'Colombo - Bandaranayake International Air Port [CMB]', 'value': 'CMB'}]
+                else:
+                    destinations=self.autoComplete((param.get("destination")))
             if len(origins)==0 :
                 return None
             if destinations==None or len(destinations)==0:
@@ -37,17 +40,20 @@ class amadeusAdapter(object):
                         resultsSet.append(self.inspiration_search(param))
                 return resultsSet
 
-        elif search=="low_fare_search":
+        elif search=="low_fare_search" or search =="low_transit_search":
             resultsSet=[]
             origins=None
             destinations=None
             if param.get("origin")!=None:
-                if param.get("origin")=="CMB":
+                if param.get("origin")=="CMB" or param.get("origin")=="Colombo" or  param.get("origin")=="Sri Lanka":
                     origins=[{'label': 'Colombo - Bandaranayake International Air Port [CMB]', 'value': 'CMB'}]
                 else:
                     origins=self.autoComplete(param.get("origin"))
             if param.get("destination")!=None:
-                destinations=self.autoComplete((param.get("destination")))
+                if param.get("origin")=="Colombo" or  param.get("origin")=="Sri Lanka":
+                    destinations= [{'label': 'Colombo - Bandaranayake International Air Port [CMB]', 'value': 'CMB'}]
+                else:
+                    destinations=self.autoComplete((param.get("destination")))
             if len(origins)==0 or len(destinations)==0:
                 return None
             else:

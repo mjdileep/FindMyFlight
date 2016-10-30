@@ -23,7 +23,7 @@ class QueryMatcher(object):
         properties = self.getProperties(statement)
         queries = self.searchPropertyMatch(properties)
         if len(queries) == 0:
-            return None, 0,None
+            return None, 0, None
         maxQueryID, maxReplaces, maxScore = self.getBestQueryProperties(queries, statement)
         query, attributes, search = self.buildOriginalQuery(maxQueryID, maxReplaces)
         if search != "Error While Entity Parsing":
@@ -69,8 +69,8 @@ class QueryMatcher(object):
             for i in range(0, len(replaces)):
                 replace = entityCoordinate(replaces[i], i)
                 score, key = self.getMaximumScoringKey(replace, statement, i)
-                if key==None:
-                    totScore=0
+                if key == None:
+                    totScore = 0
                 totScore += score / numOfReplaces
                 replaces[i] = key
             if (maxScore >= totScore):
@@ -84,7 +84,7 @@ class QueryMatcher(object):
         maxScore = 0.0
         queryList = generalizedQueries.split(",")
         for each in queryList:
-            score = fuzz.partial_ratio(statement, each)
+            score = fuzz.ratio(statement, each)
             if (score > maxScore):
                 maxScore = score
 

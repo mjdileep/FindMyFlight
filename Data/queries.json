@@ -19,6 +19,26 @@
       "price":"0"
     }
   },
+  "19":{
+    "GeneralForm":"What are fastest ways available to go from to on ?,What are the tickets available to go from to on as fast as possible?,What are  tickets available to go from to on within a minimum time,What are  tickets available to go from to on with a minimum number of transits?,",
+    "originalQuery": "?origin=xxx0&destination=xxx1&departure_date=xxx2",
+    "replaces":{
+      "xxx0":"airport",
+      "xxx1":"airport",
+      "xxx2":"date"
+     },
+    "search":"low_transit_search",
+    "attributes":{
+      "xxx0":"origin",
+      "xxx1":"destination",
+      "xxx2":"departure_date"
+    },
+    "properties":{
+      "date":"1",
+      "airport":"2",
+      "price":"0"
+    }
+  },
   "10":{
     "GeneralForm":"Tickets to on  ?,buy a ticket to on, available tickets to on?,",
     "originalQuery": "?origin=CMB&destination=xxx0&departure_date=xxx1",
@@ -230,6 +250,28 @@
       "price":"0"
     }
    },
+     "18":{
+    "GeneralForm":"on I want to go from to and I will be return by give me the fastest way?,I will be going on from to and return back on give me a suggestion with a minimum number of transits ?,on i will be going from to what are the quickest ways available and I will be return by?,Available tickets on to fly from to and return back on with a minimum number of transits",
+    "originalQuery": "?origin=xxx1&destination=xxx2&departure_date=xxx0&return_date=xxx3",
+    "replaces":{
+      "xxx0":"date",
+      "xxx1":"airport",
+      "xxx2":"airport",
+      "xxx3":"date"
+     },
+    "search":"low_transit_search",
+    "attributes":{
+      "xxx0":"departure_date",
+      "xxx1":"origin",
+      "xxx2":"destination",
+      "xxx3":"return_date"
+    },
+    "properties":{
+      "date":"2",
+      "airport":"2",
+      "price":"0"
+    }
+   },
   "14":{
     "GeneralForm":"Want to go from to on and return on?,What are the budget tickets to go from to on and return on ?,What are cheapest tickets available to go from to on and return back on ?,Available tickets to go from to on and return back on ",
     "originalQuery": "?origin=xxx0&destination=xxx1&departure_date=xxx2&return_date=xxx3",
@@ -240,6 +282,28 @@
       "xxx3":"date"
      },
     "search":"low_fare_search",
+    "attributes":{
+      "xxx0":"origin",
+      "xxx1":"destination",
+      "xxx2":"departure_date",
+      "xxx3":"return_date"
+    },
+    "properties":{
+      "date":"2",
+      "airport":"2",
+      "price":"0"
+    }
+   },
+  "17":{
+    "GeneralForm":"Want to go from to on and return on as fast as possible,Want to go from to on and return on as quick as possible,Want to go from to on and return on with a minimum number of transits ,Want to go from to on and return on with a minimum latency ",
+    "originalQuery": "?origin=xxx0&destination=xxx1&departure_date=xxx2&return_date=xxx3",
+    "replaces":{
+      "xxx0":"airport",
+      "xxx1":"airport",
+      "xxx2":"date",
+      "xxx3":"date"
+     },
+    "search":"low_transit_search",
     "attributes":{
       "xxx0":"origin",
       "xxx1":"destination",
@@ -272,7 +336,32 @@
       "airport":"1",
       "price":"0"
     }
+
+   },
+  "16":{
+    "GeneralForm":"Want to go to on and return on with a minimum time,Want to go to on and return on as fast as possible?,What are the fastest ways available to go to on and return back on ?,Available tickets to go to on and return back on with a minimum number of transits",
+    "originalQuery": "?origin=CMB&destination=xxx0&departure_date=xxx1&return_date=xxx2",
+    "replaces":{
+      "xxx0":"airport",
+      "xxx1":"date",
+      "xxx2":"date"
+     },
+    "search":"low_transit_search",
+    "attributes":{
+      "origin":"CMB",
+      "xxx0":"destination",
+      "xxx1":"departure_date",
+      "xxx2":"return_date"
+    },
+    "properties":{
+      "date":"2",
+      "airport":"1",
+      "price":"0"
+    }
+
    }
+
+
 
 }
 
